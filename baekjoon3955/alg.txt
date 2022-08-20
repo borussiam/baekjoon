@@ -1,0 +1,19 @@
+K*X + C*Y = 1
+
+0<=Y
+
+0 <= Y+z*K
+
+-Y <= z*K
+(float)(-Y)/K <= z
+z >= (K-Y-1)/K
+
+X<0
+X-z*C<0
+z > (float)X/C
+z > (X+C)/C
+
+
+X/C <= z <= (K-Y)/K
+
+K = 1337, C = 23, X = -8, Y = -465
