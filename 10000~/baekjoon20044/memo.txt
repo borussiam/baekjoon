@@ -1,0 +1,8 @@
+a < b < c < d
+min(a+d, b+c)
+min(a+c, b+d)
+-> (a+d > a+c) && (b+c > a+c)
+-->(a d) (b c)
+
+
+1 2 3 5 7 9
