@@ -1,0 +1,2 @@
+component가 2개 이상일 수 있다
+-> Bellman-Ford를 각 component에 대해 돌려주기 위해 visited 배열 사용

@@ -1,0 +1,124 @@
+우선순위: 1.많이 2.크게
+-> 9를 2개 살 수 있어도 1을 3개 사는게 이득, 8을 20개 살 수 있어도 9를 1개 사는 것이 이득
+-> 0은 다른 취급이 필요
+-->(다른 숫자 한 개를 사고 0을 최대한으로 샀을 때 숫자 개수 > 다른 숫자 최대한으로 샀을 때 숫자 개수)라면 0을 사야함
+
+살 수 있는 숫자의 최대 개수 N을 구함
+남는 돈 M_left = M - P_min * N
+큰 숫자부터, M_left + P_min으로 살 수 있는 숫자를 탐색
+M_left + P_min * k <= P * k ->    M_left / (P - P_min) <= k
+
+_____________________________________________________________
+0이 없다면:
+최소가격 숫자를 최대한 많이 사놓고, 숫자의 개수가 바뀌지 않는 선에서 더 큰 숫자들로 교체
+
+0이 있지만 최소가격 숫자가 0이 아니라면:
+위와 같음
+
+0이 있고 최소가격 숫자가 0이라면:
+0을 최대한 많이 사놓고, 숫자의 개수가 바뀌더라도 0이 아닌 수를 구입해야함
+
+-->통합: 0이 아닌 수 중 가장 싼 것을 하나 산 뒤에 모든 수 중 가장 싼 것을 최대로 산다.
+
+/*    if(price[0]<price_min&&1+(M-price_min)/price[0]>M/price_min){
+        num_of_num[num_at_price_min]=1;
+        num_of_num[0]=(M-price_min)/price[0];
+        M=M-(price_min+num_of_num[0]*price[0]);
+    }
+    else{
+        num_of_num[num_at_price_min]=M/price_min;
+        M-=price_min*num_of_num[num_at_price_min];
+    }*/
+
+2
+6 7
+18
+-->7 + 6*1 + 5
+터진다
+==> 해당 숫자의 개수가 0이 된다면 그만 줄이고, 다른 숫자로 넘어가야 한다
+==> '해당 숫자'는 언제나 0이다. 이때 0이 아닌 수 중 가장 작은 수는 1개를 이미 샀으므로, 그 숫자를 빼야 한다.
+==> 만약 0이 아닌 수 중 가장 작은 수에 대한 작업을 하는 도중 이 문제가 발생했다면?: 중단
+
+3
+10 11 12
+40
+-> 0 2개, 1 1개, 2 0개 잔여 돈 9
+-> 2 4개 요청-> 2개만 가능
+-> 0 0개, 1 1개, 2 2개 잔여 돈 5
+-> 2 5개 요청-> 1개만 가능
+-> 0 0개, 1 0개, 2 3개 잔여 돈 4
+-> 222
+
+3
+20 10 11
+39
+-> 0 0개, 1 3개, 2 0개 잔여 돈 9
+-> 2 9개 요청-> 3개만 가능
+-> 끝 222
+
+
+/*    int N,price[10],price_min=51,num_at_price_min,M,num_of_num[10]={0},k=-1,flag=0;
+    scanf("%d",&N);
+    for(int i=0;i<N;i++){
+        scanf("%d",&price[i]);
+        if(i!=0&&price[i]<=price_min){
+            price_min=price[i];
+            num_at_price_min=i;
+        }
+    }
+    scanf("%d",&M);
+    if(M<price_min)
+        printf("0");
+    else{
+        num_of_num[num_at_price_min]+=1;
+        M-=price_min;
+        if(price[0]<price_min&&M/price[0]>0){
+            k=num_at_price_min;
+            price_min=price[0];
+            num_at_price_min=0;
+        }
+        int add=M/price_min;
+        num_of_num[num_at_price_min]+=add;
+        M-=price_min*add;
+        for(int i=N-1;i>num_at_price_min;i--){
+            int add=M/(price[i]-price_min);
+            if(add>num_of_num[num_at_price_min]){
+                add=num_of_num[num_at_price_min];
+                flag=1;
+            }
+            num_of_num[i]+=add;
+            num_of_num[num_at_price_min]-=add;
+            M-=(price[i]-price_min)*add;
+            if(flag==1)
+                break;
+        }
+        if(flag==1&&k!=-1){
+            for(int i=N-1;i>k;i--){
+                flag=0;
+                int add=M/(price[i]-price_min);
+                if(add>num_of_num[k]){
+                    add=num_of_num[k];
+                    flag=1;
+                }
+                num_of_num[i]+=add;
+                num_of_num[k]-=add;
+                M-=(price[i]-price_min)*add;
+                if(flag==1)
+                    break;
+            }
+        }
+        for(int i=N-1;i>=0;i--){
+            if(num_of_num[i]!=0){
+                for(int j=0;j<num_of_num[i];j++)
+                    printf("%d",i);
+            }
+        }
+    }
+    return 0;*/
+
+3
+5 7 8
+21
+220
+
+나는 병신이다.
