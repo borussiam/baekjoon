@@ -1,0 +1,4 @@
+dp[i]: i번째 건물까지 처리했을 때 비용
+dp[0] = 0
+dp[1] = p[0].second*2
+dp[i] = min(dp[j] + max(max_h(p[j].second, p[i-1].second)*2, p[i-1].first-p[j].first)
