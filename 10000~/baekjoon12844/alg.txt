@@ -1,0 +1,6 @@
+XOR(^) 연산은 교환법칙, 결합법칙이 성립함 - 1
+같은 수를 짝수 번 XOR하면 0 - 2
+
+leaf node가 아닌 임의의 node는 두 자식의 값들의 XOR 값을 가지는데,
+두 자식에 k를 XOR한 값들의 XOR는 (a^k)^(b^k) = (a^b)^(k^k) = (a^b)^0 = a^b
+-> propagate에서 node의 값은 일정, 오직 leaf node일 때만 XOR 해주면 된다
