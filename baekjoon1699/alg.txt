@@ -1,0 +1,37 @@
+1 : 1
+2 : 2
+3 : 3
+4 : 1
+5 : 2
+6 : 3
+7 : 4
+8 : 2
+9 : 1
+10: 2
+11: 3
+12: 3
+13: 2
+14: 3
+15: 4
+16: 1
+...
+
+제곱수에 대해서는 언제나 1
+이전 수들 중 어떤 2개를 더해서 다음 경우를 만드는 것이 3개 이상을 더하는 것보다 언제나 효율적이라는 것을 증명해야 함
+
+Prove that f(a)+f(b)<=f(c)+f(d)+f(e) (a+b=c+d+e), when f(n) is the least of the numbers that is involved when 'n' is split into certain numbers of integer squares :
+First, let us prove that f(b)<=f(c)+f(d) (b=c+d).
+On the LHS, 'b' is splitted into f(b) squares in a 'f(b)' way, say b_1^2+...+b_(f(b))^2.
+On the RHS, 'c+d' is splitted into f(c)+f(d) squares in a 'f(c)' way plus a 'f(d)' way, say c_1^2+...+c_(f(c))^2+d_1^2+...+d_(f(d))^2.
+This is equal to 'b' because c_1^2+...+c_(f(c))^2=c, and d_1^2+...+d_(f(d))^2=d, and c+d=b.
+Since f(b) is the least possible, f(c)+f(d) cannot be smaller than f(b).
+On the other hand, f(c)+f(d) can be bigger than f(b). If b=16 and c=7, d=9, f(16)=1 because 4^2=16, f(7)=4 because 7=2^2+1^2+1^2+1^2, and f(9)=1 because 9=3^2.
+So f(16)=1<5=4+1=f(7)+f(9). Q.E.D.
+Similarly, you can prove that f(a)+f(b)<=f(c)+f(d)+f(e) (a+b=c+d+e), by setting a+b=c+d+e=x.
+
+...그러나 이 증명이 표지에 적히는 일은 없었다
+
+min(f(1)+f(n-1),f(2)+f(n-2),...) 하려니 함수 콜을 너무 많이 해서 스택 오버플로우+시간초과로 터진다
+f(a)=f(b)+f(c)라고 한다면(a=b+c, b>c 가정) f(c) 또한 1개 이상의 제곱수를 더해서 나온 숫자이고, 1개의 제곱수를 제외한 나머지 제곱수들을 b에 넘겨주고 f(c)를 1로 만들어도 b<a이며 문제가 변하지 않는다.
+f(a-i*i)+1만을 확인하여 그중 최솟값을 구하면 되는 것이다.
+그리고 함수 f를 따로 만들 필요없이 2중 for문으로 구현이 가능하다.
