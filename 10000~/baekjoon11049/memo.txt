@@ -1,0 +1,5 @@
+dp[i][j]: i번째 행렬에서 j번째 행렬까지의 최소 연산 수
+ans = dp[0][N-1];
+dp[i][j] = min(dp[i][j-1] + M[i][0]*M[j][0]*M[j][1], M[i][0]*M[i][1]*M[j][1] + dp[i+1][j])
+>>> 안된다
+dp[i][j] = min(dp[i][i+k] + dp[i+k+1][j] + M[i][0]*M[i+k+1][0]*M[j][1] for k from 0 to len)

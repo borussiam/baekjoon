@@ -1,0 +1,9 @@
+top-down; bottom-up 생각 안 남
+C(s, e): [s, e)장을 합치는데 필요한 최소비용
+C(1, K) = min(C(0, 1)+C(1, K), C(0, K-1)+C(K-1, K))
+[s, e) 조각의 개수는 nC2 -> O(n^2)
+base case:
+1) s == e-1 -> C(s, e) = 0
+2) s == e-2 -> C(s, e) = S[s] + S[e-1]
+base case에 대한 시복: O(1)
+=> O(n^2)
